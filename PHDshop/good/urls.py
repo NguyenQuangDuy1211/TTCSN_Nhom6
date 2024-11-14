@@ -3,5 +3,5 @@ from .views import GoodListView
 
 
 urlpatterns = [
-    path('api/goods/list', GoodListView.as_view(), name='good-list'),
+    path('list', GoodListView.as_view(), name='good-list'),
 ]
