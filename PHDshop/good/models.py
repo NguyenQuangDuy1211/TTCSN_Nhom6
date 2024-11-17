@@ -1,7 +1,9 @@
 from django.db import models
+
 class Brand(models.Model):
     brandName = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
+
 class Category(models.Model):
     categoryName = models.CharField(max_length=255)
 

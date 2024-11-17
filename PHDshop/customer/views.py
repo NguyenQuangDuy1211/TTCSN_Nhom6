@@ -24,7 +24,6 @@ class UpdateUserView(APIView):
     def put(self, request, pk):
         user = get_object_or_404(User, pk=pk)
         serializer = UserSerializer(user, data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -48,7 +47,8 @@ class LoginView(APIView):
         try:
             user = User.objects.get(email=email)
             if user.password == password:
-                return Response({"message": "Login successful!"}, status=status.HTTP_200_OK)
+                serializer = UserSerializer(user)
+                return Response({"message": "Login successful!", "user": serializer.data}, status=status.HTTP_200_OK)
             else:
                 return Response({"error": "Invalid email or password."}, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
